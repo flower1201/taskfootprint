@@ -28,7 +28,15 @@ jobs:
       - name: npm pack smoke
         shell: bash
         run: |
+          set -euo pipefail
           npm pack
-          mkdir -p "$RUNNER_TEMP/tf-pack"
-          tar -xzf taskfootprint-*.tgz -C "$RUNNER_TEMP/tf-pack"
-          node "$RUNNER_TEMP/tf-pack/package/dist/cli/index.js" --help
+          rm -rf .ci-pack .ci-smoke
+          mkdir -p .ci-pack .ci-smoke
+          tar -xzf taskfootprint-*.tgz -C .ci-pack
+          node .ci-pack/package/dist/cli/index.js --help
+          node .ci-pack/package/dist/cli/index.js --version
+          cd .ci-smoke
+          npm init -y >/dev/null
+          npm install ../taskfootprint-*.tgz
+          npx taskfootprint --help
+

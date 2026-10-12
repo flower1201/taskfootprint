@@ -16,8 +16,11 @@ export default defineConfig([
     sourcemap: true,
     clean: false,
     target: "node22",
+    // Bundle runtime deps so `npm pack` + direct node dist/cli works offline.
+    noExternal: [/.*/],
     banner: {
       js: "#!/usr/bin/env node",
     },
   },
 ]);
+
