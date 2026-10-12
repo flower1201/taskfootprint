@@ -1,0 +1,73 @@
+{
+  "name": "taskfootprint",
+  "version": "0.1.0-rc.1",
+  "description": "See what actually changed while your AI coding agent worked. Snapshot workspaces, detect out-of-scope edits, and review changes locally.",
+  "type": "module",
+  "private": true,
+  "bin": {
+    "taskfootprint": "./dist/cli/index.js"
+  },
+  "main": "./dist/index.js",
+  "types": "./dist/index.d.ts",
+  "exports": {
+    ".": {
+      "types": "./dist/index.d.ts",
+      "import": "./dist/index.js"
+    }
+  },
+  "files": [
+    "dist",
+    "examples/fixtures",
+    "LICENSE",
+    "README.md"
+  ],
+  "engines": {
+    "node": "^22.12.0 || ^24.0.0"
+  },
+  "scripts": {
+    "build": "tsup",
+    "typecheck": "tsc --noEmit",
+    "test": "vitest run",
+    "test:e2e": "vitest run --config vitest.e2e.config.ts",
+    "dev": "tsup --watch",
+    "taskfootprint": "node ./dist/cli/index.js",
+    "demo": "npm run build && node ./scripts/run-demo.mjs"
+  },
+  "keywords": [
+    "ai-coding",
+    "agent",
+    "workspace",
+    "snapshot",
+    "diff",
+    "scope",
+    "cli",
+    "local-first",
+    "offline",
+    "typescript"
+  ],
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/flower1201/taskfootprint.git"
+  },
+  "homepage": "https://github.com/flower1201/taskfootprint#readme",
+  "bugs": {
+    "url": "https://github.com/flower1201/taskfootprint/issues"
+  },
+  "license": "MIT",
+  "dependencies": {
+    "commander": "^15.0.0",
+    "ignore": "^7.0.5",
+    "minimatch": "^10.0.3",
+    "zod": "^4.6.5"
+  },
+  "devDependencies": {
+    "@types/node": "^26.6.5",
+    "playwright": "^1.56.1",
+    "tsup": "^8.5.1",
+    "typescript": "~5.7.3",
+    "vitest": "^5.0.3"
+  },
+  "allowScripts": {
+    "esbuild@0.27.7": true
+  }
+}
