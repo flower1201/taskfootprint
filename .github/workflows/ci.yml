@@ -40,4 +40,19 @@ jobs:
           npm install ../taskfootprint-*.tgz
           npx taskfootprint --help
 
-
+  e2e-chromium:
+    name: Chromium file:// E2E
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 24
+          cache: npm
+      - run: npm ci
+      - run: npm run build
+      - name: Install Chromium
+        run: npx playwright install --with-deps chromium
+      - run: npm test
+      - name: file:// Playwright E2E
+        run: npm run test:e2e

@@ -8,9 +8,10 @@ Snapshot → Agent work → Check → Offline Report
 
 TaskFootprint captures a **content-hash baseline** of your workspace, lets any AI coding agent work, then compares the current tree against that baseline. It flags out-of-scope edits and writes an offline HTML / JSON / Markdown report.
 
-Local-first · No AI API · No cloud upload · Agent-agnostic · MIT · Pre-release
+Local-first · No AI API · No cloud upload · Agent-agnostic · MIT
 
-> Status: **0.1.0-rc.1** on GitHub. **npm Registry: not published.** This tool **observes** file changes — it is **not** a runtime sandbox and cannot stop dangerous agent commands.
+> Status: **0.1.0-rc.1** on GitHub `main` (source + CI). **No GitHub Release / Tag yet.** **npm Registry: not published.**  
+> This tool **observes** file changes — it is **not** a runtime sandbox and cannot stop dangerous agent commands.
 
 ## Why not just `git diff`?
 
@@ -35,7 +36,15 @@ npm run demo
 
 Open `examples/out-demo/index.html` via `file://`. You should see a **FAIL_SCOPE** verdict because the synthetic agent also wrote `docs/secret-plan.md` outside `src/**` + `tests/**`.
 
-![TaskFootprint offline report demo](./docs/assets/demo-report.png)
+![TaskFootprint offline report demo (synthetic)](./docs/assets/demo-report.png)
+
+*Screenshot from the included synthetic demonstration (`npm run demo`), not a real agent session.*
+
+### What the interval means
+
+- **Interval change ≠ agent attribution.** TaskFootprint only compares two snapshots; it does not read agent chats or prove which process wrote a file.
+- **Gitignored files are out of observation by default.** Use `--include-ignored <path>` only for explicit opt-in paths.
+- Pre-existing dirty files that do not change again after the baseline are **not** listed as interval changes.
 
 ## CLI
 
