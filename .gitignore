@@ -12,7 +12,8 @@ examples/out-demo/
 playwright-report/
 test-results/
 .taskfootprint/
-.ci-pack/
-.ci-smoke/
+ci-pack/
+ci-smoke/
 taskfootprint-*.tgz
+
 

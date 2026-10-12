@@ -30,13 +30,14 @@ jobs:
         run: |
           set -euo pipefail
           npm pack
-          rm -rf .ci-pack .ci-smoke
-          mkdir -p .ci-pack .ci-smoke
-          tar -xzf taskfootprint-*.tgz -C .ci-pack
-          node .ci-pack/package/dist/cli/index.js --help
-          node .ci-pack/package/dist/cli/index.js --version
-          cd .ci-smoke
-          npm init -y >/dev/null
+          rm -rf ci-pack ci-smoke
+          mkdir -p ci-pack ci-smoke
+          tar -xzf taskfootprint-*.tgz -C ci-pack
+          node ci-pack/package/dist/cli/index.js --help
+          node ci-pack/package/dist/cli/index.js --version
+          cd ci-smoke
+          printf '%s\n' '{"name":"tf-smoke","private":true}' > package.json
           npm install ../taskfootprint-*.tgz
           npx taskfootprint --help
+
 
